@@ -11,7 +11,7 @@ pour l'inductance. Cas traités : charge R-L (Q1), extrémité ouverte (Q2), cou
 ## Contenu
 
 ```
-TP01_v2/                     version rendue
+TP01/                     version rendue
 ├── rapport/
 │   ├── TP01_ligne_longue.m  script MATLAB (fichier remis)
 │   ├── main.tex             préambule et \input des sections
@@ -44,7 +44,7 @@ Le script affiche les valeurs reprises dans le rapport et enregistre les figures
 Compiler le rapport :
 
 ```bash
-cd TP01_v2/rapport
+cd TP01/rapport
 pdflatex main.tex
 pdflatex main.tex
 ```
@@ -62,7 +62,5 @@ Sur Overleaf, importer `rapport_overleaf.zip` et compiler `main.tex` avec pdfLaT
 - Les figures fournies ont été tracées sous GNU Octave ; les relancer sous MATLAB
   remplace les fichiers en gardant les mêmes noms.
 
-## À compléter
+BY ZANE MOHAMMED
 
-Nom, groupe et date sur la page de garde (`page_de_garde.tex`) et dans l'en-tête du
-script.
