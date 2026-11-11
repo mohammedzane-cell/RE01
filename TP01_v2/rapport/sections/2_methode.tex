@@ -1,0 +1,45 @@
+\section{Méthode}
+
+% --- Modèle de Bergeron ---
+Pour la ligne sans pertes, l'impédance caractéristique, la vitesse de propagation et le temps de
+propagation valent
+\begin{equation}
+Z_c = \sqrt{L'/C'}, \qquad v_p = 1/\sqrt{L'C'}, \qquad \tau = d/v_p ,
+\end{equation}
+soit $Z_c = \Zc~\unit{\ohm}$, $v_p = \vp$~mi/s et $\tau = \tauL~\unit{\micro s}$.
+Le modèle de Bergeron remplace chaque extrémité par la résistance $Z_c$ en parallèle avec une
+source de courant d'historique. Cette source ne dépend que de l'autre extrémité à l'instant
+$t-\tau$ ; elle est donc connue quand on calcule l'instant $t$. Avec $i_1$ entrant dans la ligne
+en $k$ et $i_2$ sortant en $m$ vers la charge :
+\begin{align}
+i_1(t) &= \frac{v_1(t)}{Z_c} + I_k, & I_k &= i_2(t-\tau) - \frac{v_2(t-\tau)}{Z_c}, \label{eq:k}\\
+i_2(t) &= I_m - \frac{v_2(t)}{Z_c}, & I_m &= i_1(t-\tau) + \frac{v_1(t-\tau)}{Z_c}. \label{eq:m}
+\end{align}
+
+% --- Modèle compagnon de l'inductance ---
+L'inductance de charge est traitée par la règle des trapèzes. L'équation
+$\mathrm{d}i_L/\mathrm{d}t = v_L/L$ devient un circuit linéaire, le modèle compagnon : une
+résistance $R_{eq}$ en parallèle avec une source $I_h$ connue au pas précédent,
+\begin{equation}
+i_L(t) = \frac{v_L(t)}{R_{eq}} + I_h, \qquad R_{eq} = \frac{2L}{\Delta t}, \qquad
+I_h = i_L(t-\Delta t) + \frac{v_L(t-\Delta t)}{R_{eq}} ,
+\end{equation}
+avec ici $R_{eq} = \SI{5000}{\ohm}$. Côté $m$, $Z_c \parallel I_m$ alimente $R$ en série avec
+$R_{eq} \parallel I_h$. La résolution de ce petit circuit « continu » donne directement
+\begin{equation}
+i_2 = \frac{I_m + R_{eq} I_h/Z_c}{1 + (R+R_{eq})/Z_c}, \qquad v_2 = Z_c\,(I_m - i_2), \qquad
+v_L = v_2 - R\,i_2 .
+\end{equation}
+Côté $k$, la tension est imposée : $v_1 = v_s$ dès que l'interrupteur est fermé, puis $i_1$ par
+\eqref{eq:k}.
+
+% --- Interpolation du retard ---
+Le rapport $\tau/\Delta t$ n'est pas entier, donc $t-\tau$ tombe entre deux échantillons
+stockés. La valeur retardée s'obtient par interpolation linéaire :
+\begin{equation}
+x(t-\tau) \approx x_j + a\,(x_{j+1}-x_j), \qquad j = \left\lfloor \frac{t-\tau}{\Delta t}
+\right\rfloor, \qquad a = \frac{t-\tau}{\Delta t} - j .
+\end{equation}
+Il ne faut pas interpoler à travers l'instant de fermeture. Si $t-\tau < t_f$, la ligne était
+encore au repos et l'historique vaut zéro. Sinon, l'interpolation entre l'échantillon à $t=0$
+(interrupteur ouvert) et celui à $t_f$ ferait arriver l'onde en $m$ un pas trop tôt.

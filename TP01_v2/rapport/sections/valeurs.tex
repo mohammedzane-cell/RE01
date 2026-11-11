@@ -1,0 +1,78 @@
+% Valeurs imprimées par TP01_ligne_longue.m (exécution du script).
+% Si une valeur change après une nouvelle exécution, la modifier ici seulement.
+
+% --- Constantes de la ligne ---
+\newcommand{\Zc}{273{,}86}
+\newcommand{\vp}{182\,574}
+\newcommand{\tauL}{547{,}72}
+
+% --- Contrôle par rapport au livre (tau = 0,00055 s) ---
+\newcommand{\iunA}{685{,}2}
+\newcommand{\vunA}{187\,661}
+\newcommand{\ideuxA}{0{,}0}
+\newcommand{\vdeuxA}{0}
+\newcommand{\iunB}{683{,}8}
+\newcommand{\vunB}{187\,261}
+\newcommand{\ideuxB}{0{,}0}
+\newcommand{\vdeuxB}{0}
+\newcommand{\iunC}{662{,}0}
+\newcommand{\vunC}{181\,293}
+\newcommand{\ideuxC}{66{,}1}
+\newcommand{\vdeuxC}{356\,825}
+
+% --- Q1 : régime permanent (simulation / phaseurs) ---
+\newcommand{\IunSim}{429{,}0}
+\newcommand{\IunPh}{428{,}9}
+\newcommand{\IdeuxSim}{448{,}5}
+\newcommand{\IdeuxPh}{448{,}5}
+\newcommand{\VdeuxSim}{184{,}3}
+\newcommand{\VdeuxPh}{184{,}3}
+
+% --- Q2, Q3 : coefficients de réflexion et rapports max|v2|/Vm ---
+\newcommand{\GRL}{0{,}1872}
+\newcommand{\Gneuf}{0{,}5697}
+\newcommand{\Gmega}{0{,}9995}
+\newcommand{\Gcc}{-1{,}0000}
+\newcommand{\rapNeuf}{1{,}57}
+\newcommand{\rapMega}{2{,}01}
+\newcommand{\rapCC}{0{,}136}
+
+% --- Q5 : source continue, valeurs à t = 5 s ---
+\newcommand{\dcVRL}{230{,}0}
+\newcommand{\dcVOuv}{230{,}0}
+\newcommand{\dcVCC}{8{,}96}
+\newcommand{\dcIRL}{575{,}0}
+\newcommand{\dcIOuv}{230{,}2}
+\newcommand{\dcICC}{7\,491\,036}
+
+% --- Q6 : onde de choc ---
+\newcommand{\chocCrete}{206{,}7}
+\newcommand{\chocTc}{3{,}99}
+\newcommand{\etaVal}{1{,}1125}
+\newcommand{\fVmax}{0}
+\newcommand{\fImax}{0}
+\newcommand{\gArrRL}{54{,}78}
+\newcommand{\gArrOuv}{54{,}78}
+\newcommand{\gArrCC}{54{,}78}
+\newcommand{\gVRL}{458{,}6}
+\newcommand{\gVOuv}{369{,}2}
+\newcommand{\gVCC}{0{,}0}
+
+% --- Valeurs calculées à la main à partir des valeurs ci-dessus et des données ---
+\newcommand{\deuxTau}{1{,}095}         % 2 tau en ms
+\newcommand{\marcheDC}{1\,680}          % 2 x 230 kV / Zc en A
+\newcommand{\nbAR}{4\,564}              % nombre d'allers-retours en 5 s
+\newcommand{\estimDC}{7{,}7}            % 4564 x 1680 A en MA
+\newcommand{\GneufV}{361}               % (1 + Gamma(999)) x 230 kV en kV
+\newcommand{\ReqChoc}{33}               % 2 x 0,001 H / 60 ns en kilo-ohms
+\newcommand{\ReqCC}{20}                 % 2 x 0,001 H / 0,1 ms en ohms
+
+% --- Valeurs du livre (solution.pdf) ---
+\newcommand{\livreiunA}{685}
+\newcommand{\livrevunA}{187\,661}
+\newcommand{\livreiunB}{683}
+\newcommand{\livrevunB}{187\,261}
+\newcommand{\livreiunC}{662}
+\newcommand{\livrevunC}{181\,293}
+\newcommand{\livreideuxC}{66}
+\newcommand{\livrevdeuxC}{356\,731}

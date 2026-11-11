@@ -1,0 +1,13 @@
+\section{Objectif}
+
+On simule la mise sous tension d'une ligne monophasée sans pertes de longueur
+$d = 100$~mi ($L' = 1{,}5$~mH/mi, $C' = 0{,}02$~\unit{\micro\farad}/mi) alimentée par
+$v_s(t) = 230\,000\,\sqrt{2}/\sqrt{3}\,\cos(2\pi\,60\,t)$ et fermée sur une charge R-L série
+($R = \SI{400}{\ohm}$, $L = \SI{0.25}{H}$). L'interrupteur se ferme à $t_f = \SI{0.1}{ms}$ et
+le pas de calcul vaut $\Delta t = \SI{0.1}{ms}$, avec des conditions initiales nulles.
+On reprend ensuite le calcul pour une extrémité ouverte, une extrémité en court-circuit, une
+source continue de 230~kV et une onde de choc de foudre. Les grandeurs suivies sont $i_1$, $v_1$
+au départ (extrémité $k$) et $i_2$, $v_2$ à l'arrivée (extrémité $m$).
+
+\fig{circuit}{Circuit étudié : source, interrupteur fermé à \SI{0.1}{ms}, ligne de 100~mi et
+charge R-L.}{0.62}

@@ -1,0 +1,97 @@
+\section{Résultats}
+
+% --- Q1 : charge R-L ---
+\subsection{Q1 : charge R-L}
+
+À la fermeture, la source ne voit que l'impédance caractéristique : $i_1$ saute à \iunA~A,
+soit $v_1/Z_c$. Rien ne bouge en $m$ tant que l'onde incidente n'est pas arrivée. Elle parvient
+en $m$ $\tauL~\unit{\micro s}$ après la fermeture, et le premier pas où elle est vue est
+\SI{0.7}{ms}. À cet instant $v_2$ vaut \vdeuxC~V, près du double de l'onde incidente :
+au front, l'inductance se comporte presque en circuit ouvert ($R + R_{eq} = \SI{5400}{\ohm}$).
+L'onde réfléchie revient ensuite en $k$ tous les $2\tau = \deuxTau$~ms, ce qui donne les
+sauts de $i_1$ de la figure~\ref{fig:Q1_RL_zoom}. Après quelques dizaines de millisecondes, les
+grandeurs sont sinusoïdales, avec les amplitudes du tableau~\ref{tab:phaseurs}.
+
+\figdeux{Q1_RL_zoom}{Q1, charge R-L, 10 premières ms : échelon de $i_1$ à la fermeture, arrivée
+de l'onde en $m$ à \SI{0.7}{ms}, sauts de $i_1$ à chaque retour de l'onde réfléchie.}
+{Q1_RL_5s}{Q1, charge R-L, 0 à 5~s : régime sinusoïdal établi après le transitoire.}
+
+% --- Q2 : extrémité ouverte ---
+\subsection{Q2 : extrémité ouverte}
+
+Le coefficient de réflexion $\Gamma = (Z_L - Z_c)/(Z_L + Z_c)$ vaut \Gneuf{} pour
+$R = \SI{999}{\ohm}$ et \Gmega{} pour $R = \SI{e6}{\ohm}$ (\GRL{} pour la charge de Q1). La
+tension transmise en $m$ est $(1+\Gamma)$ fois l'onde incidente. Le rapport $\max|v_2|/V_m$
+vaut \rapNeuf{} pour 999~\unit{\ohm} et \rapMega{} pour \SI{e6}{\ohm} : seule la seconde valeur
+correspond au doublement de tension d'une vraie extrémité ouverte. Avec \SI{e6}{\ohm}, le
+courant $i_2$ reste nul et $v_2$ oscille autour de la sinusoïde.
+
+\figdeux{Q2_ouvert_zoom}{Q2, extrémité ouverte, 20 premières ms : à l'arrivée, $v_2$ monte à
+\rapNeuf{}\,$V_m$ pour 999~$\Omega$ et à \rapMega{}\,$V_m$ pour $10^6$~$\Omega$.}
+{Q2_ouvert_5s}{Q2, extrémité ouverte, 0 à 5~s : l'oscillation libre disparaît alors que la
+ligne est sans pertes (voir la discussion).}
+
+% --- Q3 : court-circuit ---
+\subsection{Q3 : extrémité en court-circuit}
+
+Pour $R = L = 0{,}001$, $\Gamma = \Gcc$ : l'onde réfléchie annule la tension et double le
+courant. Le rapport $\max|v_2|/V_m$ ne vaut que \rapCC. Sur la figure~\ref{fig:Q3_cc_zoom},
+$v_2$ change de signe à chaque pas après l'arrivée de l'onde ; ce point est repris dans la
+discussion. Le courant $i_2$ monte par paliers au fil des allers-retours.
+
+\figdeux{Q3_cc_zoom}{Q3, court-circuit, 20 premières ms : $v_2$ reste faible et alterne de signe
+d'un pas à l'autre, $i_2$ croît par paliers.}
+{Q3_cc_5s}{Q3, court-circuit, 0 à 5~s : courants sinusoïdaux établis, $v_2$ reste faible.}
+
+% --- Q5 : source continue ---
+\subsection{Q5 : source continue de 230~kV}
+
+Avec la source continue, l'onde incidente est un échelon constant et chaque réflexion ajoute un
+palier : les réponses deviennent des escaliers de largeur $2\tau$
+(figure~\ref{fig:Q5_DC_zoom}). Pour la charge R-L et pour 999~\unit{\ohm}, $v_2$ tend vers la
+tension de la source : à $t = \SI{5}{s}$, $v_2 = \dcVRL$~kV et \dcVOuv~kV, et $i_2 = \dcIRL$~A
+et \dcIOuv~A, c'est-à-dire $V/R$.
+
+En court-circuit, $i_2$ augmente d'environ $2V/Z_c = \marcheDC$~A à chaque aller-retour de
+l'onde ($2\tau = \deuxTau$~ms). Sur 5~s, cela fait \nbAR{} allers-retours, soit environ
+\estimDC~MA. Le script donne \dcICC~A à $t = \SI{5}{s}$, un peu moins, parce que la tension aux
+bornes de $R$ et $L$ ($v_2 = \dcVCC$~kV à 5~s) réduit légèrement chaque marche.
+
+\figdeux{Q5_DC_zoom}{Q5, source continue, 10 premières ms : escaliers de largeur $2\tau$ ; en
+court-circuit $i_1$ et $i_2$ montent d'une marche à chaque aller-retour.}
+{Q5_DC_5s}{Q5, charges R-L et 999~$\Omega$, 0 à 5~s : $v_2$ tend vers 230~kV et le courant
+vers $V/R$.}
+
+\fig{Q5_DC_cc_5s}{Q5, court-circuit, 0 à 5~s : le courant croît presque linéairement jusqu'à
+\dcICC~A à 5~s.}{0.47}
+
+% --- Q6 : onde de choc de foudre ---
+\subsection{Q6 : onde de choc de foudre}
+
+La formule de l'énoncé, avec $\tau_1 = \SI{1.2}{\micro s}$, $\tau_2 = \SI{50}{\micro s}$ et
+$n = 3$, culmine à \chocCrete~kV à \chocTc~\unit{\micro s}, et non à $V_{max} = 230$~kV. On
+multiplie l'onde par $\eta = V_{max}/\text{crête} = \etaVal$ pour ramener la crête à 230~kV
+(figure~\ref{fig:Q6a_onde}). Les calculs sur la ligne utilisent l'onde corrigée, avec
+$\Delta t = \SI{60}{ns}$ et une fenêtre de \SI{250}{\micro s}.
+
+\fig{Q6a_onde}{Q6a, onde de choc : formule de l'énoncé et onde corrigée par $\eta$.}{0.45}
+
+Sur la ligne de 100~mi, $\tau = \tauL~\unit{\micro s}$ dépasse la fenêtre de
+\SI{250}{\micro s} : l'onde n'atteint jamais l'extrémité $m$. Le script donne
+$\max|v_2| = \fVmax$~V et $\max|i_2| = \fImax$~A, et $i_1$ reproduit $v_s/Z_c$ pendant toute la
+simulation. Le résultat ne dépend donc pas de la charge.
+
+Pour voir les réflexions dans la même fenêtre, on refait le calcul sur 10~mi : le temps de
+propagation devient $\tau/10$ et l'onde arrive en $m$ à \gArrRL~\unit{\micro s} pour les trois
+charges. La charge R-L se comporte en circuit ouvert au front, car $R_{eq} = 2L/\Delta t$ est
+très grand à \SI{60}{ns} : $v_2$ monte à \gVRL~kV, près du double de 230~kV. Avec
+999~\unit{\ohm}, $v_2$ atteint \gVOuv~kV, au-dessus de $(1+\Gamma)\cdot 230 \approx \GneufV$~kV :
+l'inductance de 0,001~H en série vaut $R_{eq} = 2L/\Delta t \approx \ReqChoc$~k$\Omega$ à
+$\Delta t = \SI{60}{ns}$, si bien que la charge paraît presque ouverte au front. Le court-circuit
+résistif ($R = 0{,}001$, $L = 0$) annule $v_2$ (\gVCC~kV). L'onde réfléchie revient en $k$ à
+$2\tau/10$, puis repart vers $m$ avec le signe opposé après réflexion sur la source.
+
+\figdeux{Q6_100mi}{Q6, ligne de 100~mi : $i_1$ suit la forme de $v_s$, $v_2$ et $i_2$ restent
+nuls pendant les \SI{250}{\micro s}.}
+{Q6_10mi}{Q6, ligne de 10~mi : doublement de $v_2$ pour la charge R-L, réflexions successives à
+intervalles de $2\tau/10$.}

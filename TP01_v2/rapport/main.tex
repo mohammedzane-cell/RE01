@@ -1,0 +1,56 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[french]{babel}
+\frenchsetup{SmallCapsFigTabCaptions=false}
+\addto\captionsfrench{\renewcommand{\tablename}{Tableau}}
+\usepackage[a4paper,margin=2.5cm]{geometry}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{booktabs}
+\usepackage[locale=FR]{siunitx}
+\usepackage{caption}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{hyperref}
+
+\captionsetup{font=small,labelfont=bf}
+\hypersetup{colorlinks=true,linkcolor=black,urlcolor=black}
+
+\lstset{language=Matlab, basicstyle=\ttfamily\scriptsize, numbers=left,
+  numberstyle=\tiny, numbersep=6pt, frame=single, breaklines=true,
+  columns=fullflexible, keepspaces=true, showstringspaces=false,
+  commentstyle=\color{gray}}
+
+% Figure : \fig{fichier sans extension}{légende}{largeur en fraction de \linewidth}
+\newcommand{\fig}[3]{\begin{figure}[H]\centering\includegraphics[width=#3\linewidth]{figures/#1}\caption{#2}\label{fig:#1}\end{figure}}
+% Exemple pour une photo ou une capture d'écran (fichier figures/photo_banc.jpg) :
+% \fig{photo_banc.jpg}{Montage en salle de TP.}{0.6}
+% puis dans le texte : voir la figure~\ref{fig:photo_banc.jpg}.
+
+% Deux figures côte à côte : \figdeux{fichier 1}{légende 1}{fichier 2}{légende 2}
+\newcommand{\figdeux}[4]{\begin{figure}[H]\centering
+\begin{minipage}[t]{0.49\linewidth}\centering\includegraphics[width=0.92\linewidth]{figures/#1}\caption{#2}\label{fig:#1}\end{minipage}\hfill
+\begin{minipage}[t]{0.49\linewidth}\centering\includegraphics[width=0.92\linewidth]{figures/#3}\caption{#4}\label{fig:#3}\end{minipage}\end{figure}}
+
+\input{sections/valeurs}
+
+\begin{document}
+
+\input{page_de_garde}
+
+\input{sections/1_objectif}
+\input{sections/2_methode}
+\input{sections/3_validation}
+\input{sections/4_resultats}
+\input{sections/5_discussion}
+\input{sections/6_conclusion}
+
+\clearpage
+\appendix
+\input{annexe_code}
+
+\end{document}

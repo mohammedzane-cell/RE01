@@ -1,0 +1,50 @@
+\section{Discussion (Q4)}
+
+% --- Propagation et réflexions ---
+Dans tous les cas, l'extrémité $m$ ne réagit qu'après le temps de propagation $\tau$, et la
+source ne voit d'abord que $Z_c$, quelle que soit la charge. C'est le coefficient de réflexion qui
+fixe ensuite ce qui se passe en $m$ : la tension transmise vaut $(1+\Gamma)$ fois l'onde
+incidente. Elle double presque à l'extrémité ouverte et s'annule en court-circuit, où c'est le
+courant qui double. La source idéale impose $v_1$ ; pour l'onde réfléchie elle se comporte comme
+un court-circuit ($\Gamma = -1$ en $k$), si bien que l'onde change de signe à chaque retour en $k$.
+
+% --- 999 ohms ---
+La résistance de 999~\unit{\ohm} proposée dans l'énoncé n'est pas une vraie extrémité ouverte.
+Son coefficient de réflexion ne vaut que \Gneuf, et la tension en $m$ n'atteint que \rapNeuf{}
+fois l'amplitude de la source, contre \rapMega{} avec \SI{e6}{\ohm}. Une partie importante de
+l'onde incidente est absorbée par la charge à chaque arrivée.
+
+% --- Amortissement ---
+La ligne est sans pertes et seule la résistance de charge dissipe de l'énergie. Avec
+\SI{e6}{\ohm} ou en court-circuit, $|\Gamma|$ est très proche de 1 et l'oscillation libre
+devrait durer bien plus que 5~s. Elle disparaît pourtant en moins d'une seconde sur les
+figures~\ref{fig:Q2_ouvert_5s} et~\ref{fig:Q3_cc_5s}. Cet amortissement est numérique : comme
+$\tau/\Delta t$ n'est pas entier, la valeur retardée est interpolée linéairement, et cette
+interpolation se comporte comme un filtre passe-bas à chaque passage de l'onde sur la ligne.
+Choisir $\Delta t = \tau/N$ fait tomber le retard exactement sur un échantillon et supprime cet
+effet. Une ligne réelle s'amortit, elle, par sa résistance linéique ; le cours propose d'en tenir
+compte par une résistance localisée à chaque extrémité du modèle sans pertes.
+
+% --- Court-circuit R = L = 0,001 ---
+Le court-circuit $R = L = 0{,}001$ n'est pas parfait au pas de \SI{0.1}{ms}. Le modèle compagnon
+de l'inductance vaut $R_{eq} = 2L/\Delta t = \ReqCC$~\unit{\ohm}, qui n'est pas négligeable devant
+$Z_c$ : au premier pas, $v_2$ atteint encore \rapCC{} fois l'amplitude de la source. Ensuite $v_2$
+change de signe à chaque pas. C'est l'oscillation numérique connue de la règle des trapèzes
+quand le pas est grand devant la constante de temps du circuit ($L/Z_c$ est de quelques
+microsecondes, $\Delta t$ vaut \SI{100}{\micro s}). Le courant, lui, n'est pas affecté de façon
+visible.
+
+% --- Source continue ---
+Avec la source continue, le court-circuit ne présente pas de régime permanent fini : une source
+de tension constante débite dans une résistance presque nulle à travers l'inductance de la ligne
+et de la charge, et le courant croît donc sans cesse. Pour la charge R-L et pour 999~\unit{\ohm},
+la réponse en escalier converge vers $V/R$. Avec la source sinusoïdale, $v_s$ varie pendant un
+aller-retour, les marches se déforment et la réponse rejoint le régime donné par les phaseurs.
+
+% --- Onde de choc ---
+La formule de l'onde de choc n'atteint pas $V_{max}$ : sa crête est \chocCrete~kV, d'où la
+correction $\eta = \etaVal$. Le front dure quelques microsecondes, bien moins que
+$\tau = \tauL~\unit{\micro s}$ ; il faut donc un pas de quelques dizaines de nanosecondes, et la
+fenêtre de \SI{250}{\micro s} est trop courte pour que l'onde traverse la ligne de 100~mi.
+À cette échelle de temps, une inductance de charge se comporte presque en circuit ouvert, ce qui
+explique le doublement de tension observé sur 10~mi avec la charge R-L.

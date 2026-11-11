@@ -1,0 +1,55 @@
+\section{Validation}
+
+% --- Comparaison avec le livre ---
+Le script refait d'abord les premiers pas de l'exemple du livre, avec $\tau$ arrondi à
+\SI{0.55}{ms} comme dans la solution.
+
+\begin{table}[H]
+\centering
+\caption{Charge R-L : valeurs du livre et du script ($\tau = \SI{0.55}{ms}$).}
+\label{tab:livre}
+\begin{tabular}{llrrrr}
+\toprule
+$t$ (ms) & source & $i_1$ (A) & $v_1$ (V) & $i_2$ (A) & $v_2$ (V) \\
+\midrule
+0,1 & livre  & \livreiunA & \livrevunA & 0 & 0 \\
+    & script & \iunA & \vunA & \ideuxA & \vdeuxA \\
+0,2 & livre  & \livreiunB & \livrevunB & 0 & 0 \\
+    & script & \iunB & \vunB & \ideuxB & \vdeuxB \\
+0,7 & livre  & \livreiunC & \livrevunC & \livreideuxC & \livrevdeuxC \\
+    & script & \iunC & \vunC & \ideuxC & \vdeuxC \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Les valeurs coïncident à l'arrondi près. Le seul écart visible porte sur $v_2$ à
+\SI{0.7}{ms} : \vdeuxC~V contre \livrevdeuxC~V. Le livre arrondit $Z_c$ à \SI{274}{\ohm} et
+garde des valeurs intermédiaires arrondies (la source d'historique $I_m$ est écrite 1368~A),
+alors que le script garde $Z_c = \Zc~\unit{\ohm}$ et toutes les décimales. L'onde arrive en $m$
+au même pas que dans le livre, \SI{0.7}{ms}. La suite du calcul utilise le $\tau$ exact,
+$\tauL~\unit{\micro s}$.
+
+% --- Régime permanent par phaseurs ---
+Le régime permanent de Q1 se calcule à la main en écrivant la ligne comme un quadripôle ABCD
+sans pertes ($A = D = \cos\beta d$, $B = jZ_c\sin\beta d$, $C = j\sin\beta d/Z_c$, avec
+$\beta d = \omega\tau$) fermé sur $Z_L = R + jL\omega$. Le tableau~\ref{tab:phaseurs} compare
+ces amplitudes aux crêtes simulées entre 4,9 et 5~s.
+
+\begin{table}[H]
+\centering
+\caption{Q1 : amplitudes en régime permanent, simulation et phaseurs.}
+\label{tab:phaseurs}
+\begin{tabular}{lrr}
+\toprule
+grandeur & simulation & phaseurs \\
+\midrule
+$|I_1|$ (A)  & \IunSim & \IunPh \\
+$|I_2|$ (A)  & \IdeuxSim & \IdeuxPh \\
+$|V_2|$ (kV) & \VdeuxSim & \VdeuxPh \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+L'accord est au dixième près. Ce contrôle vérifie aussi le signe de $I_k$ : l'onde réfléchie ne
+revient en $k$ qu'après $2\tau$, elle n'apparaît pas dans le tableau~\ref{tab:livre}, mais une
+erreur de signe fausserait complètement le régime permanent.
