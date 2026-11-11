@@ -1,62 +1,81 @@
+% Page de garde : tout est placé en coordonnées absolues (cm) depuis le coin bas gauche.
 \begin{titlepage}
-% --- bandeau et filets de couleur (couleur du logo de l'ENP) ---
-\begin{tikzpicture}[remember picture,overlay]
-  \fill[bleuENP] (current page.north west) rectangle ([xshift=1.1cm]current page.south west);
-  \fill[bleuENP!35] ([xshift=1.25cm]current page.north west) rectangle ([xshift=1.4cm]current page.south west);
-  \fill[bleuENP] ([yshift=-0.5cm]current page.north east) rectangle ([xshift=1.4cm,yshift=-0.65cm]current page.north west);
-  \fill[bleuENP] ([yshift=0.5cm]current page.south east) rectangle ([xshift=1.4cm,yshift=0.65cm]current page.south west);
+\thispagestyle{empty}
+\begin{tikzpicture}[remember picture,overlay,x=1cm,y=1cm]
+\begin{scope}[shift={(current page.south west)}]
+
+% --- bloc bleu supérieur, coupé en diagonale ---
+\shade[top color=bleuENP!70!black, bottom color=bleuENP]
+  (0,29.7) -- (21,29.7) -- (21,15.2) -- (0,12.6) -- cycle;
+\fill[orangeTP] (0,12.6) -- (21,15.2) -- (21,14.95) -- (0,12.35) -- cycle;
+
+% --- champ d'ondes progressives en filigrane ---
+\begin{scope}
+  \clip (0,29.7) -- (21,29.7) -- (21,15.2) -- (0,12.6) -- cycle;
+  \foreach \k in {0,...,13} {
+    \draw[white, opacity=0.05+0.012*\k, line width=0.5pt, smooth, domain=0:21, samples=120]
+      plot (\x, {14.2+1.05*\k + (0.25+0.03*\k)*sin(\x*(38+4*\k) + 37*\k)});
+  }
+\end{scope}
+
+% --- grand « 01 » en transparence ---
+\node[anchor=north east, white, opacity=0.10, inner sep=0, font=\sffamily\bfseries\fontsize{170}{170}\selectfont]
+  at (20.4,29.2) {01};
+
+% --- logo sur carte blanche ---
+\fill[white, rounded corners=6pt] (1.5,24.6) rectangle (6.2,28.7);
+\node at (3.85,26.65) {\includegraphics[width=4.0cm]{figures/logo_enp.png}};
+
+% --- surtitre et titre ---
+\node[anchor=west, orangeTP, font=\sffamily\bfseries\small] at (1.5,23.2)
+  {\textls[200]{TRAVAUX PRATIQUES \,·\, RÉSEAUX ÉLECTRIQUES}};
+\node[anchor=west, white, font=\sffamily\bfseries\fontsize{50}{50}\selectfont] at (1.35,21.5)
+  {Propagation};
+\node[anchor=west, white, font=\sffamily\fontsize{25}{28}\selectfont] at (1.5,19.75)
+  {dans les lignes électriques};
+\fill[orangeTP] (1.55,18.75) rectangle (4.6,18.9);
+
+% --- signal : réponse en escalier de v2 à l'extrémité ouverte ---
+\draw[orangeTP!40, line width=5pt, opacity=0.35, line join=round]
+  (1.5,15.25) -- (4.0,15.25) -- (4.0,17.35) -- (6.2,17.35) -- (6.2,16.1) -- (8.4,16.1)
+  -- (8.4,16.95) -- (10.6,16.95) -- (10.6,16.4) -- (12.8,16.4) -- (12.8,16.75) -- (15.0,16.75)
+  -- (15.0,16.52) -- (17.2,16.52) -- (17.2,16.66) -- (19.5,16.66);
+\draw[orangeTP, line width=1.6pt, line join=round]
+  (1.5,15.25) -- (4.0,15.25) -- (4.0,17.35) -- (6.2,17.35) -- (6.2,16.1) -- (8.4,16.1)
+  -- (8.4,16.95) -- (10.6,16.95) -- (10.6,16.4) -- (12.8,16.4) -- (12.8,16.75) -- (15.0,16.75)
+  -- (15.0,16.52) -- (17.2,16.52) -- (17.2,16.66) -- (19.5,16.66);
+\fill[white] (4.0,17.35) circle (2.2pt);
+\node[anchor=south west, white, font=\sffamily\footnotesize, opacity=0.85] at (4.1,17.45)
+  {$v_2 \approx (1+\Gamma)\,v_{\mathrm{inc}}$};
+\node[anchor=north, white, font=\sffamily\scriptsize, opacity=0.8] at (5.1,16.0) {$2\tau$};
+\draw[white, opacity=0.8, |<->|, line width=0.5pt] (4.0,16.3) -- (6.2,16.3);
+
+% --- sous-titre ---
+\node[anchor=west, text width=17.5cm, bleuENP!70!black, font=\large\itshape] at (1.5,10.2)
+  {Modèle de Bergeron et règle des trapèzes : régimes transitoires\\ d'une ligne longue sans pertes};
+
+% --- cartes d'information ---
+\foreach \x/\titre/\ligneA/\ligneB in {
+    1.5/RÉALISÉ PAR/Mohammed ZANE/Groupe 1,
+    8.0/ENCADRÉ PAR/Prof. Karim SEBAA/Réseaux Électriques,
+    14.5/ANNÉE/2026 -- 2027/TP n\textsuperscript{o}\,01} {
+  \fill[bleuENP!6] (\x,5.5) rectangle ++(5.2,2.9);
+  \fill[orangeTP] (\x,5.5) rectangle ++(0.14,2.9);
+  \node[anchor=north west, bleuENP, font=\sffamily\bfseries\scriptsize] at (\x+0.45,8.05)
+    {\textls[180]{\titre}};
+  \node[anchor=north west, black, font=\sffamily\bfseries\large] at (\x+0.45,7.35) {\ligneA};
+  \node[anchor=north west, black!65, font=\sffamily\small] at (\x+0.45,6.5) {\ligneB};
+}
+
+% --- pied de page ---
+\draw[bleuENP!25, line width=0.4pt] (1.5,3.1) -- (19.5,3.1);
+\node[anchor=west, black!60, font=\sffamily\small] at (1.5,2.5)
+  {École Nationale Polytechnique \,·\, Département de Génie Électrique};
+\node[anchor=east, black!60, font=\sffamily\small] at (19.5,2.5) {Alger};
+\fill[bleuENP] (0,0) rectangle (21,0.55);
+\fill[orangeTP] (0,0.55) rectangle (7,0.7);
+
+\end{scope}
 \end{tikzpicture}
-
-\centering
-\vspace*{-0.8cm}
-\includegraphics[width=4.6cm]{figures/logo_enp.png}\par
-\vspace{0.5cm}
-{\large\scshape Département de Génie Électrique\par}
-\vspace{0.15cm}
-{\normalsize Module : Réseaux Électriques\par}
-
-\vspace{1.6cm}
-{\color{bleuENP}\rule{\linewidth}{1.2pt}}\par
-\vspace{0.35cm}
-{\large\scshape\color{bleuENP!80!black} Travaux pratiques n\textsuperscript{o}\,01\par}
-\vspace{0.3cm}
-{\fontsize{26}{32}\selectfont\bfseries\color{bleuENP} Propagation dans les\\[2pt] lignes électriques\par}
-\vspace{0.4cm}
-{\large\itshape Modèle de Bergeron et règle des trapèzes :\\ régimes transitoires d'une ligne longue sans pertes\par}
-\vspace{0.35cm}
-{\color{bleuENP}\rule{\linewidth}{1.2pt}}\par
-
-% --- dessin : ligne entre k et m, onde incidente et onde réfléchie ---
-\vspace{0.9cm}
-\begin{tikzpicture}[x=1cm,y=1cm,line cap=round]
-  \draw[line width=1.4pt,gray!70] (0,0) -- (11,0);
-  \fill[bleuENP] (0,0) circle (3pt) node[below=5pt,black] {$k$};
-  \fill[bleuENP] (11,0) circle (3pt) node[below=5pt,black] {$m$};
-  \draw[line width=1.6pt,bleuENP] (0.3,0) -- (2.6,0) -- (2.9,1.1) -- (5.2,1.1);
-  \draw[-latex,line width=1pt,bleuENP] (4.2,1.5) -- (5.4,1.5) node[right,black,font=\small] {onde incidente};
-  \draw[line width=1.6pt,bleuENP!45,dashed] (10.7,0) -- (8.4,0) -- (8.1,0.75) -- (6.6,0.75);
-  \draw[-latex,line width=1pt,bleuENP!45] (8.9,-0.55) -- (7.7,-0.55) node[left,black,font=\small] {onde réfléchie};
-  \node[font=\small,black] at (5.5,-1.15) {$Z_c = \sqrt{L'/C'}$, \quad $\tau = d/v_p$};
-\end{tikzpicture}
-
-\vfill
-% --- auteur et encadrant ---
-\begin{minipage}[t]{0.47\linewidth}
-\raggedright
-{\small\scshape\color{bleuENP} Réalisé par}\\[3pt]
-{\Large\bfseries Mohammed ZANE}\\[2pt]
-{\normalsize Groupe 1}
-\end{minipage}\hfill
-\begin{minipage}[t]{0.47\linewidth}
-\raggedleft
-{\small\scshape\color{bleuENP} Encadré par}\\[3pt]
-{\Large\bfseries Prof. Karim SEBAA}\\[2pt]
-{\normalsize École Nationale Polytechnique}
-\end{minipage}
-
-\vspace{1.4cm}
-{\color{bleuENP}\rule{0.35\linewidth}{0.6pt}}\par
-\vspace{0.2cm}
-{\normalsize Année universitaire 2026 -- 2027\par}
-\vspace*{0.3cm}
+\null
 \end{titlepage}
